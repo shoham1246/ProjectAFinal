@@ -1,0 +1,37 @@
+Sketch of a Single 3-Level Full Tree
+
+Here is a diagram showing the structure and node indexing (0-6) within any single 7-node tree.
+The nodes are stored in this order (0, 1, 2, 3, 4, 5, 6) in the tree_nodes_updated.txt file, seven nodes at a time, per tree.
+
+Tree Structure (by Node Index):
+
+      [ 0 ] (Root, Non-Leaf)
+     /     \
+    /       \
+  [ 1 ]     [ 2 ]
+ (L, Non-Leaf) (R, Non-Leaf)
+ /   \     /   \
+/     \   /     \
+[3]   [4] [5]   [6]
+(Leaf) (Leaf) (Leaf) (Leaf)
+
+
+Relative Addressing Logic (for Non-Leaf Nodes):
+This explains how the rel_left_child and rel_right_child fields work.
+The offset is always added to the current node's address (or index, in this simple case) to find the child node.
+
+Node 0 (Root):
+rel_left_child = 1 (Points to Node 0 + 1 = Node 1)
+rel_right_child = 2 (Points to Node 0 + 2 = Node 2)
+
+Node 1 (L):
+rel_left_child = 2 (Points to Node 1 + 2 = Node 3)
+rel_right_child = 3 (Points to Node 1 + 3 = Node 4)
+
+Node 2 (R):
+rel_left_child = 3 (Points to Node 2 + 3 = Node 5)
+rel_right_child = 4 (Points to Node 2 + 4 = Node 6)
+
+This structure is consistent for all 32 trees.
+The only things that change are the values within the nodes
+(like feature_num, cmp_value, leaf_value, next_tree_addr, and is_last_tree).
