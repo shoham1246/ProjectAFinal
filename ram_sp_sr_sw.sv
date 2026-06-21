@@ -3,7 +3,7 @@
  * Project       : RTL
  * Author        : ephssm
  * Creation date : Oct 22, 2025
- * Description   :
+ * Description   : behavioral file of Synchronous read/write single-port RAM
  *------------------------------------------------------------------------------*/
 
 //-----------------------------------------------------
