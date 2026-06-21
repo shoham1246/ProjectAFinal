@@ -3,7 +3,7 @@
  * Project       : RTL
  * Author        : ephssm
  * Creation date : Oct 5, 2025
- * Description   :
+ * Description   : constants define file
  *------------------------------------------------------------------------------*/
 
 // gbdt Registers address.
@@ -36,8 +36,8 @@
 `define MAX_CLASS_WIDTH 5
 
 //DMA PARAMS
-`define DMA_RATE 144 ///should be 9*2^something, add in report
-`define CYCLES_NUM (9 * 256) / `DMA_RATE //we currently assume that DMA_RATE must be a multiply...
+`define DMA_RATE 144 /// as written in report, should be 9*2^n for some int n
+`define CYCLES_NUM (9 * 256) / `DMA_RATE //as written in report, we currently assume that DMA_RATE must be a multiply
 `define DMA_BITS_NUM   $clog2(`CYCLES_NUM)
 
 `define just_started_d 8
