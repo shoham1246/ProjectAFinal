@@ -3,7 +3,7 @@
  * Project       : RTL
  * Author        : ephssm
  * Creation date : Oct 5, 2025
- * Description   :
+ * Description   : regfile implementation - utilize *only* behavioral ram sv file (with costume size)
  *------------------------------------------------------------------------------*/
 `include "/users/ephssm/Project/design/gbdt_define.sv"
 `timescale 1ns/100ps
