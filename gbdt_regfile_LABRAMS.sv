@@ -3,7 +3,7 @@
  * Project       : RTL
  * Author        : ephssm
  * Creation date : Oct 5, 2025
- * Description   :
+ * Description   : regfile implementation - utilize actual rams given from the lab (with fixed size - it was x4 smaller than what we needed)
  *------------------------------------------------------------------------------*/
 `include "/users/ephssm/Project/design/gbdt_define.sv"
 `timescale 1ns/100ps
@@ -82,25 +82,25 @@ localparam int TOTAL_RAMS = NUM_GROUPS * RAMS_PER_GROUP;
 																																														 
  //a. gbdt_ram_addr
  always_ff @(posedge gbdt_clk or negedge gbdt_rst_n)
-	if (!gbdt_rst_n) 								       			gbdt_ram_addr  <=  #1 '0;                              // REG0 disabled (default).
+	if (!gbdt_rst_n) 								       			gbdt_ram_addr  <=  #1 '0;                              
 	else if (p_write && p_sel && (p_addr == `GBDT_RAM_ADDR_ADDR))   gbdt_ram_addr  <=  #1 p_wdata[`RAM_ADDR_WIDTH-1:0]; 
  
  //b. gbdt_ram_data
  // write. must happen in the cycle after the APB transfer to gbdt_ram_addr
  always_ff @(posedge gbdt_clk or negedge gbdt_rst_n)
-	 if (!gbdt_rst_n) 								   	   			gbdt_ram_data <= #1 '0;                               // REG0 disabled (default).
+	 if (!gbdt_rst_n) 								   	   			gbdt_ram_data <= #1 '0;                              
 	 else if (p_write && p_sel && (p_addr == `GBDT_RAM_DATA_ADDR))  gbdt_ram_data <= #1 p_wdata[`RAM_DATA_WIDTH-1:0]; 	 
 
  // read. must happen 2 cycles after the cycle of APB transfer for gbdt_ram_addr
  always_ff @(posedge gbdt_clk or negedge gbdt_rst_n)
-	 if (!gbdt_rst_n) 									       		p_rdata <= #1 '0;                        // REG0 disabled (default).
+	 if (!gbdt_rst_n) 									       		p_rdata <= #1 '0;                      
 	 else if (!p_write && p_sel && (p_addr == `GBDT_RAM_DATA_ADDR)) p_rdata <= #1 gbdt_ram_data; 
 	 else if (!p_write && p_sel && (p_addr == `REG_MAX_CLASS)) 		p_rdata <= #1 {27'b0, old_max_class}; 
 	 else if (!p_write && p_sel && (p_addr == `REG_MAX_SCORE)) 		p_rdata <= #1 old_max_result; 
 	 else                                 				       		p_rdata <= #1 '0;
  
  always_ff @(posedge gbdt_clk or negedge gbdt_rst_n)
-	 if (!gbdt_rst_n) 									       		p_ready <= #1 '0;                                                   // REG0 disabled (default).
+	 if (!gbdt_rst_n) 									       		p_ready <= #1 '0;                                                   
 	 else if (p_sel) 												p_ready <= #1 1'b1;
 	 else                               							p_ready <= #1 '0;
 
@@ -108,13 +108,13 @@ localparam int TOTAL_RAMS = NUM_GROUPS * RAMS_PER_GROUP;
 
 //start process
  always_ff @(posedge gbdt_clk or negedge gbdt_rst_n)
-	 if (!gbdt_rst_n) 								       			gbdt_start  <=  #1 '0;                              // REG0 disabled (default).
+	 if (!gbdt_rst_n) 								       			gbdt_start  <=  #1 '0;                            
 	 else if (p_write && p_sel && (p_addr == `GBDT_START_ADDR))   	gbdt_start  <=  #1 p_wdata[0]; //mustn't do start=1 till the current input is done
 	 else															gbdt_start  <=  #1 '0;
  
 //switching ram (while writing)
  always_ff @(posedge gbdt_clk or negedge gbdt_rst_n)
-	 if (!gbdt_rst_n) 								       			gbdt_ram_sel  <=  #1 '0;                              // REG0 disabled (default).
+	 if (!gbdt_rst_n) 								       			gbdt_ram_sel  <=  #1 '0;                             
 	 else if (p_write && p_sel && (p_addr == `GBDT_SEL_ADDR))   	gbdt_ram_sel  <=  #1 p_wdata; //changes in every class switching
 
 
