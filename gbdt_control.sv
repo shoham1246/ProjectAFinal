@@ -3,7 +3,7 @@
  * Project       : RTL
  * Author        : ephssm
  * Creation date : Oct 8, 2025
- * Description   :
+ * Description   : accelerator contorler, implemented by FSM.
  *------------------------------------------------------------------------------*/
 `include "/users/ephssm/Project/design/gbdt_define.sv"
 
@@ -42,9 +42,9 @@ logic  [`DMA_BITS_NUM-1:0] counter; //in the worst case DMA_RATE=1 -> log2(CYCLE
 		Round4p1  		= 4'b1000,
 		Round4p2    	= 4'b1001,
 		Finish 			= 4'b1010,
-		MovingSt12		= 4'b1011, //CHANGE 1
-		MovingSt23		= 4'b1100, //same
-		MovingSt34		= 4'b1101  //same
+		MovingSt12		= 4'b1011, 
+		MovingSt23		= 4'b1100,
+		MovingSt34		= 4'b1101 
 	} state_t;
 
 	state_t currentState, nextState;
@@ -68,7 +68,7 @@ logic  [`DMA_BITS_NUM-1:0] counter; //in the worst case DMA_RATE=1 -> log2(CYCLE
 		if (!gbdt_rst_n)								just_started <= #1 1'b0;
 		//else if	(currentState == InputRecieving || currentState == Round1p2 || currentState == Round2p2 || currentState == Round3p2)   just_started <= #1 1'b1;
 		else if	(currentState == InputRecieving || currentState == MovingSt12 || currentState == MovingSt23 || currentState == MovingSt34) just_started <= #1 1'b1; //CHANGE 4
-		else											just_started <= #1 1'b0; //TODO: ASK SHAHAR IF LEGAL IN SYNTHESIS `just_started_d
+		else											just_started <= #1 1'b0; 
 	end
 	
 	
