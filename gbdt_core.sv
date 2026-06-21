@@ -3,7 +3,7 @@
  * Project       : RTL
  * Author        : ephssm
  * Creation date : Oct 5, 2025
- * Description   :
+ * Description   : core module of accelerator. responsible for the classification process and holds the controler
  *------------------------------------------------------------------------------*/
 `include "/users/ephssm/Project/design/gbdt_define.sv"
 `timescale 1ns/100ps
@@ -113,25 +113,5 @@ generate
 	);
   end
 endgenerate
-
-/*
-genvar i;
-
-generate
-  for (i = 0; i < 8; i++) begin : CLASS_LOOP
-	  tree_processor class_inst (
-	  .gbdt_clk      	(gbdt_clk),
-	  .gbdt_rst_n    	(gbdt_rst_n),
-	  .feature_val		(features_vals[i]),
-	  .data_from_rams	(data_from_rams[i]),
-	  .class_done 		(class_dones[i]),
-	  .class_result 	(class_results[i]),
-	  .feature_num 		(features_nums[i]),
-	  .enable		 	(class_enable[i]),
-	  .data_to_rams	 	(ram_address[i])
-	);
-  end
-endgenerate
-*/
 
 endmodule
