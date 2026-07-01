@@ -11,8 +11,23 @@ Repository for Students Project (contains SystemVerilog modules and simulation o
 ### **Supervisor**: Shahar Gino
 
 ---
+### Project Description
 
-### **Summary**
+This project presents the development of a hardware accelerator designed to solve classification problems, utilizing a ML
+algorithm called Gradient Boosting Decision Trees (GBDT). This work addresses classification tasks - one of the most relevant
+challenges and a key enabler for modern automation processes. The primary objective was to design and implement a
+hardware IP core capable of accelerating GBDT performance, utilizing the APB protocol for integration with a processor
+system. The development workflow encompassed architectural design and theoretical analysis, SV implementation and
+functional verification , logic synthesis and physical layout. The results demonstrate correct functionality of the accelerator
+and a high-speed performance.​
+
+<img width="242" height="347" alt="image" src="https://github.com/user-attachments/assets/89502283-4fd9-45ef-9fed-bd782530775d" />
+
+This repo embodies the implementation and verification phases.
+
+---
+
+### **Repository Contents**
 
 This project repo contains:
 
@@ -20,7 +35,7 @@ This project repo contains:
 * Auxiliary files used for the project.
 * ```Python``` notebook that demonstrates a proof of performance for our accelerator.
 
-The repository is organized to support synthesis and verification of our implementation, and in addition to sv files it includes other objects such as: trees text file that we used in our verification, its documentation text file, and also a notebook contains a proof of performance. Detailed explanation about the verification process and modules documentation is found inside our project report. 
+The repository is organized to support synthesis and verification of our implementation, and in addition to sv files it includes other objects such as: trees text file that we used in our verification, its documentation text file, and also a code notebook that contains a proof of performance (and can be run in Google Colab or VS Code). Detailed explanation about the verification process + results, and modules documentation is found inside our project report. 
 
 ---
 
@@ -30,11 +45,12 @@ Verification requires a SystemVerilog-compatible simulator. we used ```Verdi``` 
 
 In order to run our simulation, one needs to activate the ```gbdt_tb.sv``` file - the test bench with all the tasks, including CPU and DMA's wires manipulating (that simulates the real classification process).
 
-**Note**: for our simulation, please place the required tree input file (```tree_nodesT1_updated.txt```) into the directory that contains all source SV files.
+**Note**: for our simulation, please place the required tree input file (```tree_nodesT1_updated.txt```) into the directory that contains all source SV files. this file is inside this repo.
 
 ---
 
 ### **SV Files Modular Hierarchy**
+> Location Hierarchy: all the files should be found in the same directory.
 
 1. Accelerator Internal SV Modules Structure (*)
  
